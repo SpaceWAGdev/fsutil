@@ -1,0 +1,7 @@
+name
+path
+last-modified-date
+creation-date
+size
+human-readable-type
+content

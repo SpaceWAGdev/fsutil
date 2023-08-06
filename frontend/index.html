@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="UTF-8" />
+	<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+	<meta
+	  http-equiv="Content-Security-Policy"
+	  content="default-src 'self'; script-src https: 'self' cdn.jsdelivr.net/* 'unsafe-inline'; img-src data: blob: ; style-src 'unsafe-inline' 'self' blob: ; font-src * data:* blob: "
+	/>
+	<meta
+	  http-equiv="X-Content-Security-Policy"
+	  content="default-src 'self'; script-src 'self'"
+	/>
+	<title>File Sorting Utility - Version 2</title>
+	<link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<div class="split left">
+		<div id="noPreviewAvailableMessage" class="">
+			<div class="position-relative py-2 px-4">
+				<h1>Keine Vorschau verfügbar</h1>
+			</div>
+			
+		</div>
+
+		<embed id="generalPreviewPane" src="" class="hidden">
+		
+		<!-- docx-preview.js -->
+		<div id="docxPreviewPane" class="hidden">
+			<!-- <input id="document" type="file" onchange="console.log(this.files)" accept=".docx" />
+			<br> -->
+			<div id="container"></div>
+			
+			<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/docx-preview@0.1.15/dist/docx-preview.js"></script>
+			<script nonce="nonce-0000">
+			   function renderFile(el) {
+				console.log(typeof el)
+				 var file = el.files[0]
+				 var options = { inWrapper: false, ignoreWidth: true, ignoreHeight: true } // https://github.com/VolodymyrBaydalka/docxjs#api
+				 docx.renderAsync(file, document.getElementById("container"), null, options)
+				   .then(x => console.log("docx: finished"));
+			   }
+			</script>
+		</div>
+	</div>
+	<div class="split right">
+		<form class="m-2">
+			<button id="openFolderBtn" type="button" class="btn btn-warning w-100 btn-lg">Ordner öffnen</button>
+		</form>
+
+		<div class="m-2">
+			<div class="form-check form-switch">
+				<input checked class="form-check-input" type="checkbox" id="filterCheckDocuments" role="switch">
+				<label class="form-check-label" for="defaultCheck1">
+					Dokumente
+				</label>
+			</div>
+			<div class="form-check form-switch">
+				<input checked class="form-check-input" type="checkbox" id="filterCheckImages" role="switch">
+				<label class="form-check-label" for="defaultCheck2">
+					Bilder
+				</label>
+			</div>
+			<div class="form-check form-switch">
+				<input checked class="form-check-input" type="checkbox" id="filterCheckMedia" role="switch">
+				<label class="form-check-label" for="defaultCheck2">
+					Video & Audio
+				</label>
+			</div>
+			<div class="form-check form-switch">
+				<input class="form-check-input" type="checkbox" id="filterCheckCompressed" role="switch">
+				<label class="form-check-label" for="defaultCheck2">
+					Komprimierte Dateien
+				</label>
+			</div>
+			<div class="form-check form-switch">
+				<input class="form-check-input" type="checkbox" id="filterCheckAll" role="switch">
+				<label class="form-check-label" for="defaultCheck2">
+					Alle Dateien (Kein Filter)
+				</label>
+			</div>
+
+		</div>
+		
+		<form class="m-2">
+			<button id="startFiltering" type="button" class="btn btn-warning w-100 btn-lg">Filtern & Start</button>
+		</form>
+		<ul class="list-group m-2">
+			<li class="list-group-item">
+			<h3 style="word-wrap: break-word;">
+				<button id="fileName" type="button" class="btn btn-outline-primary btn-lg w-100">Dateiname</button>
+			</h3>
+			</li>
+			<li class="list-group-item" id="cDate"><h4></h4></li>
+			<li class="list-group-item" id="mDate"><h4></h4></li>
+			<li class="list-group-item" id="size"><h4></h4></li>
+			<li class="list-group-item" id="friendlyFiletype"><h4></h4></li>
+			<li class="list-group-item" id="path"><h4></h4></li>
+		  </ul>
+
+		  <div class=" d-flex justify-content-left">
+			<button id="skipBtn" type="button" class="btn btn-secondary m-2 w-100 btn-lg">Überspringen</button>
+			<button id="moveBtn" type="button" class="btn btn-primary m-2 w-100 btn-lg">Bewegen</button>
+			<button id="deleteBtn" type="button" class="btn btn-danger m-2 w-100 btn-lg">Löschen</button>
+		</div>
+
+		</div>
+		</div>
+	</div>
+
+	<script src="./resources/panzoom.min.js.js"></script>
+	<script src="renderer.js"></script>
+</body>
+</html>
